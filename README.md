@@ -1,1 +1,1 @@
-[OPAM](http://github.com/OCamlPro/opam) repository for my [OCaml](https://github.com/chambart/ocaml) branches
+Unstable [OPAM](http://github.com/OCamlPro/opam) repository for OCamlPro related projects.
