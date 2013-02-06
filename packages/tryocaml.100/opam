@@ -5,5 +5,5 @@ build: [
 ]
 depends: [
 	 "ocamlfind"
-	 "js_of_ocaml" {= 100 }
+	 "js_of_ocaml" {= "100" }
 	 ]
