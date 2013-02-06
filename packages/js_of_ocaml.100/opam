@@ -15,6 +15,6 @@ depends: [
   "ocamlfind"
   "deriving-ocsigen"
   "lwt" {>= "2.4"}
-  "ocp-build" {> "1.99.3-beta" }
+  "ocp-build" {>= "1.99.3-beta" }
 ]
 patches: ["js_of_ocaml.patch"]
