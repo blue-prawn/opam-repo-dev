@@ -1,7 +1,7 @@
-begin library "js_of_ocaml.compiler"
+begin library "js_of_ocaml_compiler"
   dirname = [ "compiler" ]
   (* a hack while fixing a bug with install of packs by ocp-build *)
-  lib_files = [ "../_obuild/js_of_ocaml.compiler/jsOfOCaml.cmi" ]
+  lib_files = [ "../_obuild/js_of_ocaml_compiler/jsOfOCaml.cmi" ]
   files = [
      pack JsOfOCaml [
      "pretty_print.ml" "util.ml" "dgraph.ml"
