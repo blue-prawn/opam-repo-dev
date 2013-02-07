@@ -14,6 +14,6 @@ begin library "js_of_ocaml_compiler"
      ]
   ]
   requires = [
-
+    "str"
   ]
 end
