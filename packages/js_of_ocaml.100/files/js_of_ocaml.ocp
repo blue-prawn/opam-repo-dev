@@ -1,0 +1,19 @@
+begin library "js_of_ocaml_compiler"
+  dirname = [ "compiler" ]
+  (* a hack while fixing a bug with install of packs by ocp-build *)
+  lib_files = [ "../_obuild/js_of_ocaml_compiler/jsOfOCaml.cmi" ]
+  files = [
+     pack JsOfOCaml [
+     "pretty_print.ml" "util.ml" "dgraph.ml"
+     "javascript.ml" "js_output.ml" "js_simpl.ml"
+     "instr.ml" "code.ml" "primitive.ml" "subst.ml"
+     "pure_fun.ml" "deadcode.ml"
+     "flow.ml" "inline.ml"
+     "tailcall.ml" "freevars.ml" "phisimpl.ml"
+     "linker.ml" "generate.ml" "parse.ml" "driver.ml"
+     ]
+  ]
+  requires = [
+    "str"
+  ]
+end

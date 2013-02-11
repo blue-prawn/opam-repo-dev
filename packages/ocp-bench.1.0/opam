@@ -1,0 +1,13 @@
+opam-version: "1"
+maintainer: "pierre.chambart@ocamlpro.com"
+build: [
+  ["./configure" "--prefix" "%{prefix}%"]
+  ["%{make}%"]
+  ["%{make}%" "install"]
+]
+remove: [
+  ["ocamlfind" "remove" "ocp-bench"]
+  ["rm" "-f" "%{bin}%/ocp-bench"]
+  ["rm" "-f" "%{bin}%/ocp-bench-report"]
+]
+depends: ["ocamlfind" "lwt" "opam-lib" "atdgen" "archimedes"]

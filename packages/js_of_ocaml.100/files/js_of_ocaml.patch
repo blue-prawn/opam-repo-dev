@@ -1,0 +1,100 @@
+diff -rN -u old-js_of_ocaml/compiler/Makefile new-js_of_ocaml/compiler/Makefile
+--- old-js_of_ocaml/compiler/Makefile	2013-02-01 14:54:12.913032886 +0100
++++ new-js_of_ocaml/compiler/Makefile	2013-02-01 14:54:13.085034286 +0100
+@@ -1,7 +1,7 @@
+ 
+ include ../Makefile.conf
+ 
+-all: $(COMPILER)
++all: $(COMPILER) compiler.cma
+ 
+ PACKAGES=findlib,str,unix
+ 
+diff -rN -u old-js_of_ocaml/compiler/META new-js_of_ocaml/compiler/META
+--- old-js_of_ocaml/compiler/META	1970-01-01 01:00:00.000000000 +0100
++++ new-js_of_ocaml/compiler/META	2013-02-01 14:54:13.085034286 +0100
+@@ -0,0 +1,4 @@
++description = "Js_of_ocaml compiler library"
++version = "dev"
++archive(byte) = "compiler.cma"
++archive(native) = "compiler.cmxa"
+diff -rN -u old-js_of_ocaml/lib/META new-js_of_ocaml/lib/META
+--- old-js_of_ocaml/lib/META	2013-02-01 14:54:13.053034026 +0100
++++ new-js_of_ocaml/lib/META	2013-02-01 14:54:13.109034482 +0100
+@@ -27,3 +27,13 @@
+   )
+ 
+ )
++
++package "compiler" (
++
++  exists_if = "compiler.cma compiler.cmxa"
++  description = "js_of_ocaml compiler librairies"
++  version = "[distributed with js_of_ocaml]"
++  archive(byte) = "compiler.cma"
++  archive(native) = "compiler.cmxa"
++
++)
+\ Pas de fin de ligne à la fin du fichier
+diff -rN -u old-js_of_ocaml/Makefile new-js_of_ocaml/Makefile
+--- old-js_of_ocaml/Makefile	2013-02-01 14:54:12.897032756 +0100
++++ new-js_of_ocaml/Makefile	2013-02-01 14:54:13.073034188 +0100
+@@ -32,6 +32,7 @@
+ VERSION := $(shell head -n 1 VERSION)
+ install:
+ 	ocamlfind install -patch-version ${VERSION} $(LIBRARY) lib/META $(INTF) $(IMPL) $(OTHERS) $(DOC)
++	ocamlfind install -patch-version ${VERSION} $(COMPILER_LIB) compiler/META $(COMPILER_INTF) $(COMPILER_IMPL) $(COMPILER_DOC)
+ 	install -d -m 755 $(BINDIR)
+ 	install $(BIN) $(BINDIR)
+ 
+diff -rN -u old-js_of_ocaml/Makefile.conf new-js_of_ocaml/Makefile.conf
+--- old-js_of_ocaml/Makefile.conf	2013-02-01 14:54:12.897032756 +0100
++++ new-js_of_ocaml/Makefile.conf	2013-02-01 14:54:13.073034188 +0100
+@@ -8,6 +8,11 @@
+ LIBNAME  := js_of_ocaml$(LIBEXT)
+ COMPILER := js_of_ocaml$(EXEEXT)
+ 
++####
++
++COMPILER_LIB     := js_of_ocaml_compiler-libs
++COMPILER_LIBNAME := compiler$(LIBEXT)
++
+ # opt/byte
+ BEST := opt
+ 
+diff -rN -u old-js_of_ocaml/Makefile.filelist new-js_of_ocaml/Makefile.filelist
+--- old-js_of_ocaml/Makefile.filelist	2013-02-01 14:54:12.897032756 +0100
++++ new-js_of_ocaml/Makefile.filelist	2013-02-01 14:54:13.073034188 +0100
+@@ -2,11 +2,15 @@
+ 
+ INTF := lib/*.cmi
+ 
++COMPILER_INTF := compiler/*.cmi
++
+ IMPL := lib/$(LIBNAME).cma   \
+         lib/syntax/pa_js.cmo \
+ 	lib/dll$(LIBNAME)$(DLLEXT) \
+         lib/lib$(LIBNAME)$(LIBEXT)
+ 
++COMPILER_IMPL := compiler/$(COMPILER_LIBNAME).cma
++
+ OTHERS := runtime/runtime.js
+ 
+ ifneq "${DERIVING}" ""
+@@ -32,3 +36,4 @@
+ endif
+ 
+ DOC := ${INTF:.cmi=.mli}
++COMPILER_DOC := ${COMPILER_INTF:.cmi=.mli}
+\ Pas de fin de ligne à la fin du fichier
+diff -rN -u old-js_of_ocaml/runtime/Makefile new-js_of_ocaml/runtime/Makefile
+--- old-js_of_ocaml/runtime/Makefile	2013-02-01 14:54:13.065034124 +0100
++++ new-js_of_ocaml/runtime/Makefile	2013-02-01 14:54:13.113034514 +0100
+@@ -1,6 +1,6 @@
+ FILES= 	mlString.js ieee_754.js int64.js md5.js marshall.js \
+ 	lexing.js parsing.js json.js \
+-	stdlib.js jslib.js jslib_js_of_ocaml.js
++	stdlib.js jslib.js jslib_js_of_ocaml.js weak.js
+ 
+ runtime.js: $(FILES)
+ 	cat $(FILES) > runtime.js
