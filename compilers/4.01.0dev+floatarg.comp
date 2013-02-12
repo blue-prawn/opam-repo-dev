@@ -1,5 +1,4 @@
 opam-version: "1"
-name: "trunk+floatarg"
 src: "https://github.com/chambart/ocaml/archive/floatarg.tar.gz"
 patches: []
 make: [ "world" "world.opt" ]
