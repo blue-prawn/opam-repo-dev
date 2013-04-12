@@ -10,7 +10,7 @@ begin library "js_of_ocaml_compiler"
      "pure_fun.ml" "deadcode.ml"
      "flow.ml" "inline.ml"
      "tailcall.ml" "freevars.ml" "phisimpl.ml"
-     "linker.ml" "generate.ml" "parse.ml" "driver.ml"
+     "linker.ml" "generate.ml" "parse_bytecode.ml" "driver.ml"
      ]
   ]
   requires = [
