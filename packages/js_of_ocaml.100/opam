@@ -3,18 +3,19 @@ maintainer: "zol@benozol.de"
 build: [
   ["%{make}%"]
   ["%{make}%" "install" "BINDIR=%{bin}%"]
-  ["ocp-build" "-scan" "-init" "-v" "0"]
-  ["ocp-build" "-install" "js_of_ocaml_compiler" ]
+  ["ocp-build" "init"]
+  ["ocp-build" "build"]
+  ["ocp-build" "install" "js_of_ocaml_compiler" ]
 ]
 remove: [
   ["ocamlfind" "remove" "js_of_ocaml"]
   ["ocamlfind" "remove" "js_of_ocaml_compiler-libs"]
-  [ "ocp-build" "-uninstall" "js_of_ocaml_compiler" ]
+  [ "ocp-build" "uninstall" "js_of_ocaml_compiler" ]
 ]
 depends: [
   "ocamlfind"
   "deriving-ocsigen"
   "lwt" {>= "2.4"}
-  "ocp-build" {>= "1.99.3-beta" }
+  "ocp-build" {= "100" }
 ]
 patches: ["js_of_ocaml.patch"]
