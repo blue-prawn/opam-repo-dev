@@ -1,1 +1,2 @@
 Compiler from OCaml bytecode to Javascript
+It makes it possible to write OCaml programs that run on Web browsers.
